@@ -1,0 +1,30 @@
+diff -r 5e1d826a7ffa -r 81a14ee0a850 folly/io/async/AsyncUDPSocket.cpp
+--- a/folly/io/async/AsyncUDPSocket.cpp  Wed May 08 05:55:57 2019 -0700
++++ b/folly/io/async/AsyncUDPSocket.cpp  Wed May 08 05:57:27 2019 -0700
+@@ -647,6 +647,14 @@
+   return gso_.value();
+ }
+
++void AsyncUDPSocket::setTrafficClass(int tclass) {
++  if (netops::setsockopt(
++          fd_, IPPROTO_IPV6, IPV6_TCLASS, &tclass, sizeof(int)) != 0) {
++    throw AsyncSocketException(
++        AsyncSocketException::NOT_OPEN, "Failed to set IPV6_TCLASS", errno);
++  }
++}
++
+ void AsyncUDPSocket::detachEventBase() {
+   DCHECK(eventBase_ && eventBase_->isInEventBaseThread());
+   registerHandler(uint16_t(NONE));
+diff -r 5e1d826a7ffa -r 81a14ee0a850 folly/io/async/AsyncUDPSocket.h
+--- a/folly/io/async/AsyncUDPSocket.h    Wed May 08 05:55:57 2019 -0700
++++ b/folly/io/async/AsyncUDPSocket.h    Wed May 08 05:57:27 2019 -0700
+@@ -291,6 +291,8 @@
+
+   bool setGSO(int val);
+
++  void setTrafficClass(int tclass);
++
+  protected:
+   virtual ssize_t
+   sendmsg(NetworkSocket socket, const struct msghdr* message, int flags) {

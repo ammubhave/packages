@@ -1,0 +1,146 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 3.2)
++cmake_minimum_required(VERSION 3.9)
+ project(openr)
+
+ set(CMAKE_CXX_STANDARD 14)
+@@ -18,27 +18,27 @@
+
+ include_directories(${CMAKE_SOURCE_DIR})
+
+-find_library(ASYNC async PATHS)
+-find_library(CONCURRENCY concurrency PATHS)
+-find_library(DOUBLE-CONVERSION double-conversion)
+-find_library(FBZMQ fbzmq)
+-find_library(FOLLY folly PATHS)
+-find_library(FOLLY_EXCEPTION_TRACER folly_exception_tracer PATHS)
+-find_library(FIZZ fizz PATHS)
+-find_library(GFLAGS gflags)
+-find_library(GLOG glog)
+-find_library(NL3 nl-3)
+-find_library(NLROUTE3 nl-route-3)
+-find_library(PROTOCOL protocol PATHS)
+-find_library(RE2 re2)
+-find_library(SODIUM sodium)
+-find_library(SIGAR sigar)
+-find_library(THRIFT thrift PATHS)
+-find_library(THRIFTCPP2 thriftcpp2 PATHS)
+-find_library(THRIFTPROTOCOL thriftprotocol PATHS)
+-find_library(TRANSPORT transport PATHS)
+-find_library(ZMQ zmq)
+-find_library(ZSTD zstd)
++find_library(ASYNC libasync.a PATHS)
++find_library(CONCURRENCY libconcurrency.a PATHS)
++find_library(DOUBLE-CONVERSION libdouble-conversion.a)
++find_library(FBZMQ libfbzmq.a)
++find_library(FOLLY libfolly.a PATHS)
++find_library(FOLLY_EXCEPTION_TRACER libfolly_exception_tracer.a PATHS)
++find_library(FIZZ libfizz.a PATHS)
++find_library(GFLAGS libgflags.a)
++find_library(GLOG libglog.a)
++find_library(NL3 libnl-3.a)
++find_library(NLROUTE3 libnl-route-3.a)
++find_library(PROTOCOL libprotocol.a PATHS)
++find_library(RE2 libre2.a)
++find_library(SODIUM libsodium.a)
++find_library(SIGAR libsigar.a)
++find_library(THRIFT libthrift.a PATHS)
++find_library(THRIFTCPP2 libthriftcpp2.a PATHS)
++find_library(THRIFTPROTOCOL libthriftprotocol.a PATHS)
++find_library(TRANSPORT libtransport.a PATHS)
++find_library(ZMQ libzmq.a)
++find_library(ZSTD libzstd.a)
+
+ # FOLLY_EXCEPTION_TRACER may not be found
+ if(NOT FOLLY_EXCEPTION_TRACER)
+@@ -361,86 +361,6 @@
+   DESTINATION lib
+ )
+
+-add_executable(openr
+-  openr/Main.cpp
+-  openr/common/Flags.cpp
+-)
+-
+-target_include_directories(openr
+-  PRIVATE
+-  ${LIBNL3-HEADERS}/libnl3
+-)
+-
+-target_link_libraries(openr
+-  openrlib
+-  ${FBZMQ}
+-  ${ZMQ}
+-  ${GLOG}
+-  ${GFLAGS}
+-  ${THRIFT}
+-  ${ZSTD}
+-  ${THRIFTCPP2}
+-  ${ASYNC}
+-  ${PROTOCOL}
+-  ${TRANSPORT}
+-  ${CONCURRENCY}
+-  ${THRIFTPROTOCOL}
+-  ${FOLLY}
+-  ${FOLLY_EXCEPTION_TRACER}
+-  ${SODIUM}
+-  ${SIGAR}
+-  -lboost_system
+-  -lpthread
+-  ${NLROUTE3}
+-  ${NL3}
+-  -lcrypto
+-)
+-
+-install(TARGETS
+-  openr
+-  DESTINATION sbin
+-)
+-
+-add_executable(platform_linux
+-  openr/platform/LinuxPlatformMain.cpp
+-  openr/platform/NetlinkFibHandler.cpp
+-  openr/platform/NetlinkSystemHandler.cpp
+-)
+-
+-target_include_directories(platform_linux
+-  PRIVATE
+-  ${LIBNL3-HEADERS}/libnl3
+-)
+-
+-target_link_libraries(platform_linux
+-  openrlib
+-  ${GLOG}
+-  ${GFLAGS}
+-  ${FOLLY}
+-  ${FOLLY_EXCEPTION_TRACER}
+-  ${THRIFT}
+-  ${ZSTD}
+-  ${THRIFTCPP2}
+-  ${ASYNC}
+-  ${PROTOCOL}
+-  ${TRANSPORT}
+-  ${CONCURRENCY}
+-  ${THRIFTPROTOCOL}
+-  ${SODIUM}
+-  ${SIGAR}
+-  ${ZMQ}
+-  ${SIGAR}
+-  -lboost_system
+-  -lpthread
+-  ${NLROUTE3}
+-  ${NL3}
+-)
+-
+-install(TARGETS
+-  platform_linux
+-  DESTINATION sbin
+-)
+-
+ #
+ # Install files
+ #
+

@@ -24,7 +24,7 @@ CMAKE_OPTIONS:= \
 	-DFOLLY_HAVE_WCHAR_SUPPORT_EXITCODE=OFF \
 	-DHAVE_VSNPRINTF_ERRORS_EXITCODE=OFF \
 	-DFOLLY_HAVE_XSI_STRERROR_R_EXITCODE=0 \
-	-DBUILD_SHARED_LIBS=ON
+	-DBUILD_SHARED_LIBS=OFF
 CMAKE_INSTALL:=1
 
 define Package/libfolly
@@ -48,7 +48,6 @@ endef
 
 define Package/libfolly/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libfolly*.so* $(1)/usr/lib/
 endef
 
 $(eval $(call BuildPackage,libfolly))

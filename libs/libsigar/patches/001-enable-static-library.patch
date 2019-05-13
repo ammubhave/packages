@@ -1,0 +1,14 @@
+Index: sigar-a6c61edf8c64e013411e8c9d753165cd03102c6e/src/CMakeLists.txt
+===================================================================
+--- sigar-a6c61edf8c64e013411e8c9d753165cd03102c6e.orig/src/CMakeLists.txt
++++ sigar-a6c61edf8c64e013411e8c9d753165cd03102c6e/src/CMakeLists.txt
+@@ -98,7 +98,7 @@ SET(SIGAR_SRC ${SIGAR_SRC}
+   sigar_util.c
+ )
+
+-ADD_LIBRARY(sigar SHARED ${SIGAR_SRC})
++ADD_LIBRARY(sigar STATIC ${SIGAR_SRC})
+ IF(WIN32)
+  TARGET_LINK_LIBRARIES(sigar ws2_32 netapi32 version)
+ ENDIF(WIN32)
+

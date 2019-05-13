@@ -26,7 +26,7 @@ CMAKE_INSTALL:=1
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
-CMAKE_OPTIONS += -DBUILD_SHARED_LIBS=ON
+CMAKE_OPTIONS += -DBUILD_SHARED_LIBS=OFF
 CMAKE_OPTIONS += -DFMT_DOC=OFF
 CMAKE_OPTIONS += -DFMT_TEST=OFF
 
@@ -45,7 +45,6 @@ endef
 
 define Package/libfmt/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libfmt.so* $(1)/usr/lib/
 endef
 
 define Build/InstallDev
@@ -53,7 +52,7 @@ define Build/InstallDev
 	$(CP) $(PKG_INSTALL_DIR)/usr/include/fmt/*.h $(1)/usr/include/fmt/
 
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libfmt.so* $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libfmt.a $(1)/usr/lib/
 
 	$(INSTALL_DIR) $(1)/usr/lib/cmake
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/cmake/* $(1)/usr/lib/cmake/

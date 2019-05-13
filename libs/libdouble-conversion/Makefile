@@ -43,7 +43,7 @@ define Package/libdouble-conversion/description
 endef
 
 CMAKE_OPTIONS += \
-  -DBUILD_SHARED_LIBS=ON \
+  -DBUILD_SHARED_LIBS=OFF \
   -DBUILD_TESTING=OFF
 
 define Build/InstallDev
@@ -56,17 +56,13 @@ define Build/InstallDev
 	  $(1)/usr/include/
 
 	$(INSTALL_DATA) \
-	  $(PKG_INSTALL_DIR)/usr/lib/lib*.so* \
+	  $(PKG_INSTALL_DIR)/usr/lib/lib*.a \
 	  $(1)/usr/lib/
 endef
 
 define Package/libdouble-conversion/install
 	$(INSTALL_DIR) \
 	  $(1)/usr/lib
-
-	$(INSTALL_DATA) \
-	  $(PKG_INSTALL_DIR)/usr/lib/lib*.so* \
-	  $(1)/usr/lib/
 endef
 
 $(eval $(call BuildPackage,libdouble-conversion))

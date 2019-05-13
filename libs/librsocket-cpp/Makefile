@@ -22,7 +22,7 @@ CMAKE_OPTIONS:= \
 	-DBUILD_BENCHMARKS=OFF \
 	-DBUILD_EXAMPLES=OFF \
 	-DBUILD_TESTS=OFF \
-	-DBUILD_SHARED_LIBS=ON
+	-DBUILD_SHARED_LIBS=OFF
 CMAKE_INSTALL:=1
 
 define Package/librsocket-cpp
@@ -49,12 +49,10 @@ endef
 
 define Package/librsocket-cpp/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libReactiveSocket.so* $(1)/usr/lib/
 endef
 
 define Package/libyarpl/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libyarpl*.so* $(1)/usr/lib/
 endef
 
 $(eval $(call BuildPackage,librsocket-cpp))

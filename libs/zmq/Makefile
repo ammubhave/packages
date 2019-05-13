@@ -42,6 +42,7 @@ endef
 define Package/libzmq-nc
   $(call Package/libzmq/default)
   VARIANT:=nc
+  DEPENDS+=+libsodium
 endef
 
 define Package/libzmq-curve
@@ -68,7 +69,7 @@ CONFIGURE_ARGS += \
 ifeq ($(BUILD_VARIANT),curve)
   CONFIGURE_ARGS+= --with-libsodium
 else
-  CONFIGURE_ARGS+= --without-libsodium
+  CONFIGURE_ARGS+= --with-libsodium
 endif
 
 define Build/InstallDev
