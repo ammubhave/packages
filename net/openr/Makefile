@@ -32,7 +32,7 @@ define Package/openr
 	CATEGORY:=Network
 	TITLE:=OpenR: Distributed platform for building autonomic network functions.
 	DEPENDS:=+libstdcpp +fbthrift +libfolly +libsigar +libzmq-nc \
-		+libnl-core +libnl-route +re2 +libatomic +fbzmq +libsae
+		+libnl-core +libnl-route +re2 +libatomic +fbzmq +libsae +libpcap
 endef
 
 define Package/openr/description
